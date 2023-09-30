@@ -7,18 +7,19 @@
       </p>
       <p v-else>
         {{ comment.content }}
-        <button v-if="isCurrentUserComment(comment)" @click="editComment(comment)">Edit</button>
+        <button @click="editComment(comment)">Edit</button>
       </p>
       <p>Created at: {{ comment.createdAt }}</p>
       <p>Score: {{ comment.score }}</p>
       <p>By: {{ comment.user.username }}</p>
       <button @click="toggleReply(comment)">Reply</button>
+      <button @click="vote(comment, 1)">+</button>
+      <button @click="vote(comment, -1)">-</button>
       <div v-if="comment.showReply">
         <input v-model="replyText" placeholder="Reply">
         <button @click="submitReply(comment)">Send</button>
       </div>
-      <button v-if="isCurrentUserComment(comment)" @click="deleteComment(comment.id)">Delete</button>
-
+      <button @click="deleteComment(comment.id)">Delete</button>
       <div v-for="reply in comment.replies" :key="reply.id">
         <p v-if="reply.isEditing">
           <textarea v-model="reply.content"></textarea>
@@ -26,15 +27,16 @@
         </p>
         <p v-else>
           {{ reply.content }}
-          <button v-if="isCurrentUserComment(reply)" @click="editReply(reply)">Edit</button>
+          <button @click="editReply(reply)">Edit</button>
         </p>
         <p>Created at: {{ reply.createdAt }}</p>
         <p>Score: {{ reply.score }}</p>
         <p>By: {{ reply.user.username }}</p>
-        <button v-if="isCurrentUserComment(reply)" @click="deleteReply(reply.id)">Delete</button>
+        <button @click="vote(reply, 1)">+</button>
+        <button @click="vote(reply, -1)">-</button>
+        <button @click="deleteReply(reply.id)">Delete</button>
       </div>
     </div>
-
     <div>
       <input v-model="newComment" placeholder="Comment">
       <button @click="addComment">Comment Add</button>
@@ -98,7 +100,7 @@ export default {
     },
     deleteComment(commentId) {
       const index = this.comments.findIndex(comment => comment.id === commentId);
-      if (index !== -1 && this.isCurrentUserComment(this.comments[index])) {
+      if (index !== -1) {
         this.comments.splice(index, 1);
       }
     },
@@ -115,7 +117,7 @@ export default {
       });
 
       const index = commentWithReply.replies.findIndex(reply => reply.id === replyId);
-      if (index !== -1 && this.isCurrentUserComment(commentWithReply.replies[index])) {
+      if (index !== -1) {
         commentWithReply.replies.splice(index, 1);
       }
     },
@@ -139,8 +141,17 @@ export default {
       });
       this.newComment = '';
     },
-    isCurrentUserComment(comment) {
-      return comment.user.username === jsonData.currentUser.username;
+    vote(item, value) {
+      if (!item.voted) {
+        item.voted = 0;
+      }
+      if (item.voted === value) {
+        item.score -= value;
+        item.voted = 0;
+      } else {
+        item.score += value;
+        item.voted = value;
+      }
     },
   },
 };
