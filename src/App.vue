@@ -12,6 +12,7 @@
       <p>Created at: {{ comment.createdAt }}</p>
       <p>Score: {{ comment.score }}</p>
       <p>By: {{ comment.user.username }}</p>
+      <img :src="comment.user.image.png" alt="User Avatar" v-if="comment.user.image && comment.user.image.png" />
       <button @click="toggleReply(comment)">Reply</button>
       <button @click="vote(comment, 1)">+</button>
       <button @click="vote(comment, -1)">-</button>
@@ -32,6 +33,7 @@
         <p>Created at: {{ reply.createdAt }}</p>
         <p>Score: {{ reply.score }}</p>
         <p>By: {{ reply.user.username }}</p>
+        <img :src="reply.user.image.png" alt="User Avatar" v-if="reply.user.image && reply.user.image.png" />
         <button @click="vote(reply, 1)">+</button>
         <button @click="vote(reply, -1)">-</button>
         <button @click="deleteReply(reply.id)" v-if="isCurrentUserComment(reply)">Delete</button>
@@ -53,7 +55,6 @@ export default {
       comments: [],
       newComment: '',
       replyText: '',
-      jsonData: jsonData,
     };
   },
   mounted() {
@@ -101,7 +102,7 @@ export default {
     },
     deleteComment(commentId) {
       const index = this.comments.findIndex(comment => comment.id === commentId);
-      if (index !== -1) {
+      if (index !== -1 && this.isCurrentUserComment(this.comments[index])) {
         this.comments.splice(index, 1);
       }
     },
@@ -118,7 +119,7 @@ export default {
       });
 
       const index = commentWithReply.replies.findIndex(reply => reply.id === replyId);
-      if (index !== -1) {
+      if (index !== -1 && this.isCurrentUserComment(commentWithReply.replies[index])) {
         commentWithReply.replies.splice(index, 1);
       }
     },
@@ -155,8 +156,8 @@ export default {
       }
     },
     isCurrentUserComment(comment) {
-      if (this.jsonData.currentUser) {
-        return comment.user.username === this.jsonData.currentUser.username;
+      if (jsonData.currentUser) {
+        return comment.user.username === jsonData.currentUser.username;
       }
       return false;
     },
