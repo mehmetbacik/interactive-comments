@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <div v-for="comment in comments" :key="comment.id">
-      <p v-if="comment.isEditing">
+      <p v-if="comment.isEditing && isCurrentUserComment(comment)">
         <textarea v-model="comment.content"></textarea>
         <button @click="saveEdit(comment)">Save</button>
       </p>
       <p v-else>
         {{ comment.content }}
-        <button @click="editComment(comment)">Edit</button>
+        <button @click="editComment(comment)" v-if="isCurrentUserComment(comment)">Edit</button>
       </p>
       <p>Created at: {{ comment.createdAt }}</p>
       <p>Score: {{ comment.score }}</p>
@@ -19,22 +19,22 @@
         <input v-model="replyText" placeholder="Reply">
         <button @click="submitReply(comment)">Send</button>
       </div>
-      <button @click="deleteComment(comment.id)">Delete</button>
+      <button @click="deleteComment(comment.id)" v-if="isCurrentUserComment(comment)">Delete</button>
       <div v-for="reply in comment.replies" :key="reply.id">
-        <p v-if="reply.isEditing">
+        <p v-if="reply.isEditing && isCurrentUserComment(reply)">
           <textarea v-model="reply.content"></textarea>
           <button @click="saveReplyEdit(reply)">Save</button>
         </p>
         <p v-else>
           {{ reply.content }}
-          <button @click="editReply(reply)">Edit</button>
+          <button @click="editReply(reply)" v-if="isCurrentUserComment(reply)">Edit</button>
         </p>
         <p>Created at: {{ reply.createdAt }}</p>
         <p>Score: {{ reply.score }}</p>
         <p>By: {{ reply.user.username }}</p>
         <button @click="vote(reply, 1)">+</button>
         <button @click="vote(reply, -1)">-</button>
-        <button @click="deleteReply(reply.id)">Delete</button>
+        <button @click="deleteReply(reply.id)" v-if="isCurrentUserComment(reply)">Delete</button>
       </div>
     </div>
     <div>
@@ -53,6 +53,7 @@ export default {
       comments: [],
       newComment: '',
       replyText: '',
+      jsonData: jsonData,
     };
   },
   mounted() {
@@ -152,6 +153,12 @@ export default {
         item.score += value;
         item.voted = value;
       }
+    },
+    isCurrentUserComment(comment) {
+      if (this.jsonData.currentUser) {
+        return comment.user.username === this.jsonData.currentUser.username;
+      }
+      return false;
     },
   },
 };
