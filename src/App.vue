@@ -7,7 +7,7 @@
       </p>
       <p v-else>
         {{ comment.content }}
-        <button @click="editComment(comment)">Edit</button>
+        <button v-if="isCurrentUserComment(comment)" @click="editComment(comment)">Edit</button>
       </p>
       <p>Created at: {{ comment.createdAt }}</p>
       <p>Score: {{ comment.score }}</p>
@@ -17,7 +17,7 @@
         <input v-model="replyText" placeholder="Reply">
         <button @click="submitReply(comment)">Send</button>
       </div>
-      <button @click="deleteComment(comment.id)">Delete</button>
+      <button v-if="isCurrentUserComment(comment)" @click="deleteComment(comment.id)">Delete</button>
 
       <div v-for="reply in comment.replies" :key="reply.id">
         <p v-if="reply.isEditing">
@@ -26,12 +26,12 @@
         </p>
         <p v-else>
           {{ reply.content }}
-          <button @click="editReply(reply)">Edit</button>
+          <button v-if="isCurrentUserComment(reply)" @click="editReply(reply)">Edit</button>
         </p>
         <p>Created at: {{ reply.createdAt }}</p>
         <p>Score: {{ reply.score }}</p>
         <p>By: {{ reply.user.username }}</p>
-        <button @click="deleteReply(reply.id)">Delete</button>
+        <button v-if="isCurrentUserComment(reply)" @click="deleteReply(reply.id)">Delete</button>
       </div>
     </div>
 
@@ -90,6 +90,7 @@ export default {
       this.replyText = '';
     },
     editComment(comment) {
+      if (comment.isEditing) return;
       comment.isEditing = true;
     },
     saveEdit(comment) {
@@ -97,11 +98,12 @@ export default {
     },
     deleteComment(commentId) {
       const index = this.comments.findIndex(comment => comment.id === commentId);
-      if (index !== -1) {
+      if (index !== -1 && this.isCurrentUserComment(this.comments[index])) {
         this.comments.splice(index, 1);
       }
     },
     editReply(reply) {
+      if (reply.isEditing) return;
       reply.isEditing = true;
     },
     saveReplyEdit(reply) {
@@ -113,7 +115,7 @@ export default {
       });
 
       const index = commentWithReply.replies.findIndex(reply => reply.id === replyId);
-      if (index !== -1) {
+      if (index !== -1 && this.isCurrentUserComment(commentWithReply.replies[index])) {
         commentWithReply.replies.splice(index, 1);
       }
     },
@@ -136,6 +138,9 @@ export default {
         isEditing: false,
       });
       this.newComment = '';
+    },
+    isCurrentUserComment(comment) {
+      return comment.user.username === jsonData.currentUser.username;
     },
   },
 };
