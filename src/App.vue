@@ -1,15 +1,40 @@
 <template>
   <div id="app">
     <div v-for="comment in comments" :key="comment.id">
-      <p>{{ comment.content }}</p>
+      <p v-if="comment.isEditing">
+        <textarea v-model="comment.content"></textarea>
+        <button @click="saveEdit(comment)">Save</button>
+      </p>
+      <p v-else>
+        {{ comment.content }}
+        <button @click="editComment(comment)">Edit</button>
+      </p>
+      <p>Created at: {{ comment.createdAt }}</p>
+      <p>Score: {{ comment.score }}</p>
+      <p>By: {{ comment.user.username }}</p>
       <button @click="toggleReply(comment)">Reply</button>
       <div v-if="comment.showReply">
         <input v-model="replyText" placeholder="Reply">
         <button @click="submitReply(comment)">Send</button>
       </div>
-      <button @click="editComment(comment.id)">Edit</button>
       <button @click="deleteComment(comment.id)">Delete</button>
+
+      <div v-for="reply in comment.replies" :key="reply.id">
+        <p v-if="reply.isEditing">
+          <textarea v-model="reply.content"></textarea>
+          <button @click="saveReplyEdit(reply)">Save</button>
+        </p>
+        <p v-else>
+          {{ reply.content }}
+          <button @click="editReply(reply)">Edit</button>
+        </p>
+        <p>Created at: {{ reply.createdAt }}</p>
+        <p>Score: {{ reply.score }}</p>
+        <p>By: {{ reply.user.username }}</p>
+        <button @click="deleteReply(reply.id)">Delete</button>
+      </div>
     </div>
+
     <div>
       <input v-model="newComment" placeholder="Comment">
       <button @click="addComment">Comment Add</button>
@@ -18,6 +43,8 @@
 </template>
 
 <script>
+import jsonData from './assets/data/data.json';
+
 export default {
   data() {
     return {
@@ -26,22 +53,47 @@ export default {
       replyText: '',
     };
   },
+  mounted() {
+    this.comments = jsonData.comments.map(comment => {
+      return {
+        ...comment,
+        showReply: false,
+        isEditing: false,
+        replies: comment.replies.map(reply => {
+          return {
+            ...reply,
+            isEditing: false,
+          };
+        }),
+      };
+    });
+  },
   methods: {
     toggleReply(comment) {
       comment.showReply = !comment.showReply;
     },
     submitReply(comment) {
-      comment.replies.push({ content: this.replyText });
+      comment.replies.push({
+        id: new Date().getTime(),
+        content: this.replyText,
+        createdAt: 'now',
+        score: 0,
+        user: {
+          image: {
+            png: './assets/images/avatars/image-juliusomo.png',
+            webp: './assets/images/avatars/image-juliusomo.webp',
+          },
+          username: 'juliusomo',
+        },
+        isEditing: false,
+      });
       this.replyText = '';
     },
-    editComment(commentId) {
-      const comment = this.comments.find(comment => comment.id === commentId);
-      if (comment) {
-        const newText = prompt('Edit:', comment.content);
-        if (newText !== null) {
-          comment.content = newText;
-        }
-      }
+    editComment(comment) {
+      comment.isEditing = true;
+    },
+    saveEdit(comment) {
+      comment.isEditing = false;
     },
     deleteComment(commentId) {
       const index = this.comments.findIndex(comment => comment.id === commentId);
@@ -49,26 +101,42 @@ export default {
         this.comments.splice(index, 1);
       }
     },
+    editReply(reply) {
+      reply.isEditing = true;
+    },
+    saveReplyEdit(reply) {
+      reply.isEditing = false;
+    },
+    deleteReply(replyId) {
+      const commentWithReply = this.comments.find(comment => {
+        return comment.replies.find(reply => reply.id === replyId);
+      });
+
+      const index = commentWithReply.replies.findIndex(reply => reply.id === replyId);
+      if (index !== -1) {
+        commentWithReply.replies.splice(index, 1);
+      }
+    },
     addComment() {
       if (this.newComment.trim() === '') return;
       this.comments.push({
+        id: new Date().getTime(),
         content: this.newComment,
         createdAt: 'now',
-        id: new Date().getTime(),
-        replies: [],
         score: 0,
         user: {
           image: {
-            png: '/images/avatars/image-juliusomo.png',
-            webp: '/images/avatars/image-juliusomo.webp',
+            png: './assets/images/avatars/image-juliusomo.png',
+            webp: './assets/images/avatars/image-juliusomo.webp',
           },
           username: 'juliusomo',
         },
+        replies: [],
         showReply: false,
+        isEditing: false,
       });
       this.newComment = '';
     },
   },
 };
 </script>
-
