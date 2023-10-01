@@ -78,6 +78,11 @@ export default {
   methods: {
     toggleReply(comment) {
       comment.showReply = !comment.showReply;
+      if (comment.showReply) {
+        this.replyText = `@${comment.user.username} `;
+      } else {
+        this.replyText = '';
+      }
     },
     submitReply(comment) {
       comment.replies.push({
