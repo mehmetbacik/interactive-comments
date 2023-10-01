@@ -12,13 +12,13 @@
       <p>Created at: {{ comment.createdAt }}</p>
       <p>Score: {{ comment.score }}</p>
       <p>By: {{ comment.user.username }}</p>
-      <img :src="getUserImage(comment.user.image)" alt="User Avatar" v-if="comment.user.image && comment.user.image.png" />
+      <img :src="getUserImage(comment.user.image)" alt="User Avatar" v-if="comment.user && comment.user.image && comment.user.image.png" />
       <button @click="toggleReply(comment)">Reply</button>
       <button @click="vote(comment, 1)">+</button>
       <button @click="vote(comment, -1)">-</button>
       <div v-if="comment.showReply">
         <img :src="getUserImage(currentUser.image)" alt="User Avatar" v-if="currentUser && currentUser.image && currentUser.image.png" />
-        <input v-model="replyText" placeholder="Reply">
+        <input v-model="comment.replyText" placeholder="Reply">
         <button @click="submitReply(comment)">Send</button>
       </div>
       <button @click="deleteComment(comment.id)" v-if="isCurrentUserComment(comment)">Delete</button>
@@ -34,7 +34,7 @@
         <p>Created at: {{ reply.createdAt }}</p>
         <p>Score: {{ reply.score }}</p>
         <p>By: {{ reply.user.username }}</p>
-        <img :src="getUserImage(reply.user.image)" alt="User Avatar" v-if="reply.user.image && reply.user.image.png" />
+        <img :src="getUserImage(reply.user.image)" alt="User Avatar" v-if="reply.user && reply.user.image && reply.user.image.png" />
         <button @click="vote(reply, 1)">+</button>
         <button @click="vote(reply, -1)">-</button>
         <button @click="deleteReply(reply.id)" v-if="isCurrentUserComment(reply)">Delete</button>
@@ -56,7 +56,6 @@ export default {
     return {
       comments: [],
       newComment: '',
-      replyText: '',
       currentUser: jsonData.currentUser,
     };
   },
@@ -66,6 +65,7 @@ export default {
         ...comment,
         showReply: false,
         isEditing: false,
+        replyText: '',
         replies: comment.replies.map(reply => {
           return {
             ...reply,
@@ -79,22 +79,21 @@ export default {
     toggleReply(comment) {
       comment.showReply = !comment.showReply;
       if (comment.showReply) {
-        this.replyText = `@${comment.user.username} `;
+        comment.replyText = `@${comment.user.username} `;
       } else {
-        this.replyText = '';
+        comment.replyText = '';
       }
     },
     submitReply(comment) {
       comment.replies.push({
         id: new Date().getTime(),
-        content: this.replyText,
+        content: comment.replyText,
         createdAt: 'now',
         score: 0,
         user: this.currentUser,
         isEditing: false,
-        showReply: false,
       });
-      this.replyText = '';
+      comment.replyText = '';
     },
     editComment(comment) {
       if (comment.isEditing) return;
@@ -137,6 +136,7 @@ export default {
         replies: [],
         showReply: false,
         isEditing: false,
+        replyText: '',
       });
       this.newComment = '';
     },
