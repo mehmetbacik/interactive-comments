@@ -17,6 +17,7 @@
       <button @click="vote(comment, 1)">+</button>
       <button @click="vote(comment, -1)">-</button>
       <div v-if="comment.showReply">
+        <img :src="getUserImage(currentUser.image)" alt="User Avatar" v-if="currentUser && currentUser.image && currentUser.image.png" />
         <input v-model="replyText" placeholder="Reply">
         <button @click="submitReply(comment)">Send</button>
       </div>
@@ -40,6 +41,7 @@
       </div>
     </div>
     <div>
+      <img :src="getUserImage(currentUser.image)" alt="User Avatar" v-if="currentUser && currentUser.image && currentUser.image.png" />
       <input v-model="newComment" placeholder="Comment">
       <button @click="addComment">Comment Add</button>
     </div>
@@ -55,6 +57,7 @@ export default {
       comments: [],
       newComment: '',
       replyText: '',
+      currentUser: jsonData.currentUser,
     };
   },
   mounted() {
@@ -82,14 +85,9 @@ export default {
         content: this.replyText,
         createdAt: 'now',
         score: 0,
-        user: {
-          image: {
-            png: './assets/images/avatars/image-juliusomo.png',
-            webp: './assets/images/avatars/image-juliusomo.webp',
-          },
-          username: 'juliusomo',
-        },
+        user: this.currentUser,
         isEditing: false,
+        showReply: false,
       });
       this.replyText = '';
     },
@@ -130,13 +128,7 @@ export default {
         content: this.newComment,
         createdAt: 'now',
         score: 0,
-        user: {
-          image: {
-            png: './assets/images/avatars/image-juliusomo.png',
-            webp: './assets/images/avatars/image-juliusomo.webp',
-          },
-          username: 'juliusomo',
-        },
+        user: this.currentUser,
         replies: [],
         showReply: false,
         isEditing: false,
