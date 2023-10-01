@@ -12,7 +12,7 @@
       <p>Created at: {{ comment.createdAt }}</p>
       <p>Score: {{ comment.score }}</p>
       <p>By: {{ comment.user.username }}</p>
-      <img :src="comment.user.image.png" alt="User Avatar" v-if="comment.user.image && comment.user.image.png" />
+      <img :src="getUserImage(comment.user.image)" alt="User Avatar" v-if="comment.user.image && comment.user.image.png" />
       <button @click="toggleReply(comment)">Reply</button>
       <button @click="vote(comment, 1)">+</button>
       <button @click="vote(comment, -1)">-</button>
@@ -33,7 +33,7 @@
         <p>Created at: {{ reply.createdAt }}</p>
         <p>Score: {{ reply.score }}</p>
         <p>By: {{ reply.user.username }}</p>
-        <img :src="reply.user.image.png" alt="User Avatar" v-if="reply.user.image && reply.user.image.png" />
+        <img :src="getUserImage(reply.user.image)" alt="User Avatar" v-if="reply.user.image && reply.user.image.png" />
         <button @click="vote(reply, 1)">+</button>
         <button @click="vote(reply, -1)">-</button>
         <button @click="deleteReply(reply.id)" v-if="isCurrentUserComment(reply)">Delete</button>
@@ -160,6 +160,11 @@ export default {
         return comment.user.username === jsonData.currentUser.username;
       }
       return false;
+    },
+    getUserImage(image) {
+      if (image && image.png) {
+        return require(`${image.png}`);
+      }
     },
   },
 };
