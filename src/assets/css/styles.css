@@ -11,3 +11,64 @@ body {
     font-size: var(--theme-size);
     min-height: 100vh;
 }
+
+#app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--very-light-gray);
+}
+
+#interactive-comments {
+    width: calc(40% - 80px);
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#interactive-comments .comments-content .current-user-comment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 25px;
+    margin-top: 20px;
+}
+
+#interactive-comments .comments-content .comment-reply-submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 25px;
+    margin-top: 20px;
+}
+
+#interactive-comments .comments-content .comment-reply {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#interactive-comments .comments-content .comment-reply .comment-reply-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 25px;
+    margin-top: 20px;
+    width: calc(100% - 120px);
+}
+
+#interactive-comments .comment-add {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 25px;
+    margin-top: 20px;
+}
