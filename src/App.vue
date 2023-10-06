@@ -11,8 +11,8 @@
           <div class="top-content">
             <div class="user-inf">
               <img :src="getUserImage(comment.user.image)" alt="User Avatar" v-if="comment.user && comment.user.image && comment.user.image.png" />
-              <p>{{ comment.user.username }}</p>
-              <p>{{ comment.createdAt }}</p>
+              <p class="name">{{ comment.user.username }}</p>
+              <p class="date">{{ comment.createdAt }}</p>
             </div>
             <div class="rp-button">
               <button @click="toggleReply(comment)">Reply</button>
@@ -36,8 +36,8 @@
         <button @click="submitReply(comment)">Send</button>
       </div>
       <button @click="deleteComment(comment.id)" v-if="isCurrentUserComment(comment)">Delete</button>
-      <div class="comment-reply" v-for="reply in comment.replies" :key="reply.id">
-        <div class="comment-reply-content">
+      <div class="comment-reply">
+        <div class="comment-reply-content" v-for="reply in comment.replies" :key="reply.id">
           <p v-if="reply.isEditing && isCurrentUserComment(reply)">
             <textarea v-model="reply.content"></textarea>
             <button @click="saveReplyEdit(reply)">Save</button>
