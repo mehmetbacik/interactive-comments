@@ -3,16 +3,20 @@
     <div class="comments-content" v-for="comment in comments" :key="comment.id">
       <div class="current-user-comment">
         <div class="score">
-          <button @click="vote(comment, 1)">+</button>
+          <button @click="vote(comment, 1)"><i class="plus"></i></button>
           <p>{{ comment.score }}</p>
-          <button @click="vote(comment, -1)">-</button>
+          <button @click="vote(comment, -1)"><i class="minus"></i></button>
         </div>
         <div class="content">
           <div class="top-content">
-            <img :src="getUserImage(comment.user.image)" alt="User Avatar" v-if="comment.user && comment.user.image && comment.user.image.png" />
-            <p>{{ comment.user.username }}</p>
-            <p>{{ comment.createdAt }}</p>
-            <button @click="toggleReply(comment)">Reply</button>
+            <div class="user-inf">
+              <img :src="getUserImage(comment.user.image)" alt="User Avatar" v-if="comment.user && comment.user.image && comment.user.image.png" />
+              <p>{{ comment.user.username }}</p>
+              <p>{{ comment.createdAt }}</p>
+            </div>
+            <div class="rp-button">
+              <button @click="toggleReply(comment)">Reply</button>
+            </div>
           </div>
           <div class="text-content">
             <p v-if="comment.isEditing && isCurrentUserComment(comment)">
