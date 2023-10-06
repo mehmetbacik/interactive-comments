@@ -35,6 +35,11 @@ body {
     margin-top: 20px;
 }
 
+#interactive-comments .comments-content .current-user-comment .content .top-content {
+    display: flex;
+    align-items: center;
+}
+
 #interactive-comments .comments-content .comment-reply-submit {
     display: flex;
     align-items: center;
@@ -50,6 +55,9 @@ body {
     align-items: flex-end;
     justify-content: center;
     flex-direction: column;
+    margin-top: 25px;
+    border-left: solid 1px var(--light-gray);
+    margin-left: 30px;
 }
 
 #interactive-comments .comments-content .comment-reply .comment-reply-content {
@@ -60,7 +68,11 @@ body {
     border-radius: 10px;
     padding: 25px;
     margin-top: 20px;
-    width: calc(100% - 120px);
+    width: calc(100% - 80px);
+}
+
+#interactive-comments .comments-content .comment-reply .comment-reply-content:first-child {
+    margin-top: 0px;
 }
 
 #interactive-comments .comment-add {

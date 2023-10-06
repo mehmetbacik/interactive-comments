@@ -2,21 +2,29 @@
   <div id="interactive-comments">
     <div class="comments-content" v-for="comment in comments" :key="comment.id">
       <div class="current-user-comment">
-        <p v-if="comment.isEditing && isCurrentUserComment(comment)">
-          <textarea v-model="comment.content"></textarea>
-          <button @click="saveEdit(comment)">Save</button>
-        </p>
-        <p v-else>
-          {{ comment.content }}
-          <button @click="editComment(comment)" v-if="isCurrentUserComment(comment)">Edit</button>
-        </p>
-        <p>Created at: {{ comment.createdAt }}</p>
-        <p>Score: {{ comment.score }}</p>
-        <p>By: {{ comment.user.username }}</p>
-        <img :src="getUserImage(comment.user.image)" alt="User Avatar" v-if="comment.user && comment.user.image && comment.user.image.png" />
-        <button @click="toggleReply(comment)">Reply</button>
-        <button @click="vote(comment, 1)">+</button>
-        <button @click="vote(comment, -1)">-</button>
+        <div class="score">
+          <button @click="vote(comment, 1)">+</button>
+          <p>{{ comment.score }}</p>
+          <button @click="vote(comment, -1)">-</button>
+        </div>
+        <div class="content">
+          <div class="top-content">
+            <img :src="getUserImage(comment.user.image)" alt="User Avatar" v-if="comment.user && comment.user.image && comment.user.image.png" />
+            <p>{{ comment.user.username }}</p>
+            <p>{{ comment.createdAt }}</p>
+            <button @click="toggleReply(comment)">Reply</button>
+          </div>
+          <div class="text-content">
+            <p v-if="comment.isEditing && isCurrentUserComment(comment)">
+              <textarea v-model="comment.content"></textarea>
+              <button @click="saveEdit(comment)">Save</button>
+            </p>
+            <p v-else>
+              {{ comment.content }}
+              <button @click="editComment(comment)" v-if="isCurrentUserComment(comment)">Edit</button>
+            </p>
+          </div>
+        </div>
       </div>
       <div class="comment-reply-submit" v-if="comment.showReply">
         <img :src="getUserImage(currentUser.image)" alt="User Avatar" v-if="currentUser && currentUser.image && currentUser.image.png" />
@@ -24,8 +32,8 @@
         <button @click="submitReply(comment)">Send</button>
       </div>
       <button @click="deleteComment(comment.id)" v-if="isCurrentUserComment(comment)">Delete</button>
-      <div class="comment-reply">
-        <div class="comment-reply-content" v-for="reply in comment.replies" :key="reply.id">
+      <div class="comment-reply" v-for="reply in comment.replies" :key="reply.id">
+        <div class="comment-reply-content">
           <p v-if="reply.isEditing && isCurrentUserComment(reply)">
             <textarea v-model="reply.content"></textarea>
             <button @click="saveReplyEdit(reply)">Save</button>
