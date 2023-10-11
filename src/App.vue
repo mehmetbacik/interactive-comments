@@ -38,21 +38,33 @@
       <button @click="deleteComment(comment.id)" v-if="isCurrentUserComment(comment)">Delete</button>
       <div class="comment-reply">
         <div class="comment-reply-content" v-for="reply in comment.replies" :key="reply.id">
-          <p v-if="reply.isEditing && isCurrentUserComment(reply)">
-            <textarea v-model="reply.content"></textarea>
-            <button @click="saveReplyEdit(reply)">Save</button>
-          </p>
-          <p v-else>
-            {{ reply.content }}
-            <button @click="editReply(reply)" v-if="isCurrentUserComment(reply)">Edit</button>
-          </p>
-          <p>Created at: {{ reply.createdAt }}</p>
-          <p>Score: {{ reply.score }}</p>
-          <p>By: {{ reply.user.username }}</p>
-          <img :src="getUserImage(reply.user.image)" alt="User Avatar" v-if="reply.user && reply.user.image && reply.user.image.png" />
-          <button @click="vote(reply, 1)">+</button>
-          <button @click="vote(reply, -1)">-</button>
-          <button @click="deleteReply(reply.id)" v-if="isCurrentUserComment(reply)">Delete</button>
+          <div class="score">
+            <button @click="vote(reply, 1)"><i class="plus"></i></button>
+            <p>{{ reply.score }}</p>
+            <button @click="vote(reply, -1)"><i class="minus"></i></button>
+          </div>
+          <div class="content">
+            <div class="top-content">
+              <div class="user-inf">
+                <img :src="getUserImage(reply.user.image)" alt="User Avatar" v-if="reply.user && reply.user.image && reply.user.image.png" />
+                <p class="name">{{ reply.user.username }}</p>
+                <p class="date">{{ reply.createdAt }}</p>
+              </div>
+              <div class="rp-button">
+                <button @click="editReply(reply)" v-if="isCurrentUserComment(reply)">Edit</button>
+                <button @click="deleteReply(reply.id)" v-if="isCurrentUserComment(reply)">Delete</button>
+              </div>
+            </div>
+            <div class="text-content">
+              <p v-if="reply.isEditing && isCurrentUserComment(reply)">
+                <textarea v-model="reply.content"></textarea>
+                <button @click="saveReplyEdit(reply)">Save</button>
+              </p>
+              <p v-else>
+                {{ reply.content }}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
