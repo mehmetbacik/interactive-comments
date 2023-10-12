@@ -173,8 +173,8 @@ body {
 
 #interactive-comments .comments-content .comment-reply .comment-reply-content {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-start;
+    gap: 25px;
     background-color: var(--white);
     border-radius: 10px;
     padding: 25px;
@@ -184,17 +184,6 @@ body {
 
 #interactive-comments .comments-content .comment-reply .comment-reply-content:first-child {
     margin-top: 0px;
-}
-
-#interactive-comments .comments-content .comment-reply .comment-reply-content {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 25px;
-    background-color: var(--white);
-    border-radius: 10px;
-    padding: 25px;
-    margin-top: 20px;
 }
 
 #interactive-comments .comments-content .comment-reply .comment-reply-content .score {
