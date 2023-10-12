@@ -56,9 +56,9 @@
               </div>
             </div>
             <div class="text-content">
-              <p v-if="reply.isEditing && isCurrentUserComment(reply)">
+              <p v-if="reply.isEditing && isCurrentUserComment(reply)" class="comment-reply-content-edit">
                 <textarea v-model="reply.content"></textarea>
-                <button @click="saveReplyEdit(reply)">Save</button>
+                <button @click="saveReplyEdit(reply)">Update</button>
               </p>
               <p v-else>
                 {{ reply.content }}
