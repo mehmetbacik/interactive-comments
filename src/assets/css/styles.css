@@ -114,16 +114,51 @@ body {
 #interactive-comments .comments-content .current-user-comment .content .text-content p {
     line-height: 1.5;
     color: var(--grayish-blue);
+    margin-bottom: 0;
 }
 
 #interactive-comments .comments-content .comment-reply-submit {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
+    gap: 15px;
     background-color: var(--white);
     border-radius: 10px;
     padding: 25px;
     margin-top: 20px;
+}
+
+#interactive-comments .comments-content .comment-reply-submit img {
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    border-radius: 100%;
+}
+
+#interactive-comments .comments-content .comment-reply-submit .comment-reply-text {
+    width: 100%;
+    border: 2px solid var(--light-gray);
+    border-radius: 10px;
+    color: var(--dark-blue);
+    height: 60px;
+    padding: 15px 25px;
+    position: relative;
+    resize: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+#interactive-comments .comments-content .comment-reply-submit button {
+    text-transform: uppercase;
+    background-color: var(--moderate-blue);
+    color: var(--white);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 700;
 }
 
 #interactive-comments .comments-content .comment-reply {
@@ -258,6 +293,7 @@ body {
 #interactive-comments .comments-content .comment-reply .comment-reply-content .content .text-content p {
     line-height: 1.5;
     color: var(--grayish-blue);
+    margin-bottom: 0;
 }
 
 #interactive-comments .comment-add {

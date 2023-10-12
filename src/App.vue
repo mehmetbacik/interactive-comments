@@ -32,8 +32,8 @@
       </div>
       <div class="comment-reply-submit" v-if="comment.showReply">
         <img :src="getUserImage(currentUser.image)" alt="User Avatar" v-if="currentUser && currentUser.image && currentUser.image.png" />
-        <input v-model="comment.replyText" placeholder="Reply">
-        <button @click="submitReply(comment)">Send</button>
+        <textarea v-model="comment.replyText" class="comment-reply-text" placeholder="Add a reply..." spellcheck="false"></textarea>
+        <button @click="submitReply(comment)">Reply</button>
       </div>
       <button @click="deleteComment(comment.id)" v-if="isCurrentUserComment(comment)">Delete</button>
       <div class="comment-reply" v-if="comment.replies.length > 0">
