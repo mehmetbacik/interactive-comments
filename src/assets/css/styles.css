@@ -233,8 +233,26 @@ body {
     cursor: pointer;
 }
 
-#interactive-comments .comments-content .comment-reply .comment-reply-content .content .top-content .rp-button button:before {
-    content: url(/src/assets/images/icon-reply.svg);
+#interactive-comments .comments-content .comment-reply .comment-reply-content .content .top-content .rp-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#interactive-comments .comments-content .comment-reply .comment-reply-content .content .top-content .rp-button .delete {
+    color: var(--soft-red);
+}
+
+#interactive-comments .comments-content .comment-reply .comment-reply-content .content .top-content .rp-button .delete:before {
+    content: url(/src/assets/images/icon-delete.svg);
+}
+
+#interactive-comments .comments-content .comment-reply .comment-reply-content .content .top-content .rp-button .edit {
+    color: var(--moderate-blue);
+}
+
+#interactive-comments .comments-content .comment-reply .comment-reply-content .content .top-content .rp-button .edit:before {
+    content: url(/src/assets/images/icon-edit.svg);
 }
 
 #interactive-comments .comments-content .comment-reply .comment-reply-content .content .text-content p {
@@ -244,10 +262,44 @@ body {
 
 #interactive-comments .comment-add {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
+    gap: 15px;
     background-color: var(--white);
     border-radius: 10px;
     padding: 25px;
     margin-top: 20px;
+}
+
+#interactive-comments .comment-add img {
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    border-radius: 100%;
+}
+
+#interactive-comments .comment-add .comment-text {
+    width: 100%;
+    border: 2px solid var(--light-gray);
+    border-radius: 10px;
+    color: var(--dark-blue);
+    height: 60px;
+    padding: 15px 25px;
+    position: relative;
+    resize: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+#interactive-comments .comment-add button {
+    text-transform: uppercase;
+    background-color: var(--moderate-blue);
+    color: var(--white);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 700;
 }

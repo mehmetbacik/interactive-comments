@@ -36,7 +36,7 @@
         <button @click="submitReply(comment)">Send</button>
       </div>
       <button @click="deleteComment(comment.id)" v-if="isCurrentUserComment(comment)">Delete</button>
-      <div class="comment-reply">
+      <div class="comment-reply" v-if="comment.replies.length > 0">
         <div class="comment-reply-content" v-for="reply in comment.replies" :key="reply.id">
           <div class="score">
             <button @click="vote(reply, 1)"><i class="plus"></i></button>
@@ -51,8 +51,8 @@
                 <p class="date">{{ reply.createdAt }}</p>
               </div>
               <div class="rp-button">
-                <button @click="editReply(reply)" v-if="isCurrentUserComment(reply)">Edit</button>
-                <button @click="deleteReply(reply.id)" v-if="isCurrentUserComment(reply)">Delete</button>
+                <button @click="deleteReply(reply.id)" v-if="isCurrentUserComment(reply)" class="delete">Delete</button>
+                <button @click="editReply(reply)" v-if="isCurrentUserComment(reply)" class="edit">Edit</button>
               </div>
             </div>
             <div class="text-content">
@@ -70,7 +70,7 @@
     </div>
     <div class="comment-add">
       <img :src="getUserImage(currentUser.image)" alt="User Avatar" v-if="currentUser && currentUser.image && currentUser.image.png" />
-      <input v-model="newComment" placeholder="Comment">
+      <textarea v-model="newComment" class="comment-text" placeholder="Add a comment..." spellcheck="false"></textarea>
       <button @click="addComment">Send</button>
     </div>
   </div>
