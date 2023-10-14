@@ -26,6 +26,7 @@
             <p v-else>
               {{ comment.content }}
               <button @click="editComment(comment)" v-if="isCurrentUserComment(comment)">Edit</button>
+              <button @click="deleteComment(comment.id)" v-if="isCurrentUserComment(comment)">Delete</button>
             </p>
           </div>
         </div>
@@ -35,7 +36,6 @@
         <textarea v-model="comment.replyText" class="comment-reply-text" placeholder="Add a reply..." spellcheck="false"></textarea>
         <button @click="submitReply(comment)">Reply</button>
       </div>
-      <button @click="deleteComment(comment.id)" v-if="isCurrentUserComment(comment)">Delete</button>
       <div class="comment-reply" v-if="comment.replies.length > 0">
         <div class="comment-reply-content" v-for="reply in comment.replies" :key="reply.id">
           <div class="score">
