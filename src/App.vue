@@ -113,7 +113,7 @@ export default {
       }
     },
     submitReply(comment) {
-      comment.replies.push({
+        comment.replies.push({
         id: new Date().getTime(),
         content: comment.replyText,
         createdAt: 'now',
@@ -122,6 +122,7 @@ export default {
         isEditing: false,
       });
       comment.replyText = '';
+      comment.showReply = false;
     },
     editComment(comment) {
       if (comment.isEditing) return;
