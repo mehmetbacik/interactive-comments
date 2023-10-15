@@ -100,11 +100,16 @@ body {
     color: var(--grayish-blue);
 }
 
+#interactive-comments .comments-content .current-user-comment .content .top-content .rp-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 #interactive-comments .comments-content .current-user-comment .content .top-content .rp-button button {
     display: flex;
     align-items: flex-end;
     gap: 8px;
-    color: var(--moderate-blue);
     font-size: 16px;
     font-weight: 700;
     background-color: transparent;
@@ -112,8 +117,28 @@ body {
     cursor: pointer;
 }
 
-#interactive-comments .comments-content .current-user-comment .content .top-content .rp-button button:before {
+#interactive-comments .comments-content .current-user-comment .content .top-content .rp-button .reply {
+    color: var(--moderate-blue);
+}
+
+#interactive-comments .comments-content .current-user-comment .content .top-content .rp-button .reply:before {
     content: url(/src/assets/images/icon-reply.svg);
+}
+
+#interactive-comments .comments-content .current-user-comment .content .top-content .rp-button .delete {
+    color: var(--soft-red);
+}
+
+#interactive-comments .comments-content .current-user-comment .content .top-content .rp-button .delete:before {
+    content: url(/src/assets/images/icon-delete.svg);
+}
+
+#interactive-comments .comments-content .current-user-comment .content .top-content .rp-button .edit {
+    color: var(--moderate-blue);
+}
+
+#interactive-comments .comments-content .current-user-comment .content .top-content .rp-button .edit:before {
+    content: url(/src/assets/images/icon-edit.svg);
 }
 
 #interactive-comments .comments-content .current-user-comment .content .text-content p {

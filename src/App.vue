@@ -15,7 +15,9 @@
               <p class="date">{{ comment.createdAt }}</p>
             </div>
             <div class="rp-button">
-              <button @click="toggleReply(comment)">Reply</button>
+              <button @click="deleteCommentConfirmation(comment.id)" v-if="isCurrentUserComment(comment)" class="delete">Delete</button>
+              <button @click="editComment(comment)" v-if="isCurrentUserComment(comment)" class="edit">Edit</button>
+              <button @click="toggleReply(comment)" class="reply">Reply</button>
             </div>
           </div>
           <div class="text-content">
@@ -25,8 +27,6 @@
             </p>
             <p v-else>
               {{ comment.content }}
-              <button @click="editComment(comment)" v-if="isCurrentUserComment(comment)">Edit</button>
-              <button @click="deleteCommentConfirmation(comment.id)" v-if="isCurrentUserComment(comment)">Delete</button>
             </p>
           </div>
         </div>
