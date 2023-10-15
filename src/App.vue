@@ -26,7 +26,7 @@
             <p v-else>
               {{ comment.content }}
               <button @click="editComment(comment)" v-if="isCurrentUserComment(comment)">Edit</button>
-              <button @click="deleteComment(comment.id)" v-if="isCurrentUserComment(comment)">Delete</button>
+              <button @click="deleteCommentConfirmation(comment.id)" v-if="isCurrentUserComment(comment)">Delete</button>
             </p>
           </div>
         </div>
@@ -51,7 +51,7 @@
                 <p class="date">{{ reply.createdAt }}</p>
               </div>
               <div class="rp-button">
-                <button @click="deleteReply(reply.id)" v-if="isCurrentUserComment(reply)" class="delete">Delete</button>
+                <button @click="deleteReplyConfirmation(reply.id)" v-if="isCurrentUserComment(reply)" class="delete">Delete</button>
                 <button @click="editReply(reply)" v-if="isCurrentUserComment(reply)" class="edit">Edit</button>
               </div>
             </div>
@@ -73,6 +73,11 @@
       <textarea v-model="newComment" class="comment-text" placeholder="Add a comment..." spellcheck="false"></textarea>
       <button @click="addComment">Send</button>
     </div>
+    <div class="confirmation-popup" v-if="confirmDelete">
+      <p>Are you sure?</p>
+      <button @click="confirmDeleteAction">Yes</button>
+      <button @click="cancelDeleteAction">No</button>
+    </div>
   </div>
 </template>
 
@@ -85,6 +90,9 @@ export default {
       comments: [],
       newComment: '',
       currentUser: jsonData.currentUser,
+      confirmDelete: false,
+      commentToDelete: null,
+      replyToDelete: null,
     };
   },
   mounted() {
@@ -131,11 +139,37 @@ export default {
     saveEdit(comment) {
       comment.isEditing = false;
     },
-    deleteComment(commentId) {
-      const index = this.comments.findIndex(comment => comment.id === commentId);
-      if (index !== -1 && this.isCurrentUserComment(this.comments[index])) {
-        this.comments.splice(index, 1);
+    deleteCommentConfirmation(commentId) {
+      this.commentToDelete = commentId;
+      this.confirmDelete = true;
+    },
+    deleteReplyConfirmation(replyId) {
+      this.replyToDelete = replyId;
+      this.confirmDelete = true;
+    },
+    confirmDeleteAction() {
+      if (this.commentToDelete !== null) {
+        const index = this.comments.findIndex(comment => comment.id === this.commentToDelete);
+        if (index !== -1 && this.isCurrentUserComment(this.comments[index])) {
+          this.comments.splice(index, 1);
+        }
+        this.commentToDelete = null;
       }
+      if (this.replyToDelete !== null) {
+        for (const comment of this.comments) {
+          const replyIndex = comment.replies.findIndex(reply => reply.id === this.replyToDelete);
+          if (replyIndex !== -1 && this.isCurrentUserComment(comment.replies[replyIndex])) {
+            comment.replies.splice(replyIndex, 1);
+          }
+        }
+        this.replyToDelete = null;
+      }
+      this.confirmDelete = false;
+    },
+    cancelDeleteAction() {
+      this.commentToDelete = null;
+      this.replyToDelete = null;
+      this.confirmDelete = false;
     },
     editReply(reply) {
       if (reply.isEditing) return;
@@ -143,16 +177,6 @@ export default {
     },
     saveReplyEdit(reply) {
       reply.isEditing = false;
-    },
-    deleteReply(replyId) {
-      const commentWithReply = this.comments.find(comment => {
-        return comment.replies.find(reply => reply.id === replyId);
-      });
-
-      const index = commentWithReply.replies.findIndex(reply => reply.id === replyId);
-      if (index !== -1 && this.isCurrentUserComment(commentWithReply.replies[index])) {
-        commentWithReply.replies.splice(index, 1);
-      }
     },
     addComment() {
       if (this.newComment.trim() === '') return;
