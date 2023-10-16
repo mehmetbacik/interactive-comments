@@ -354,8 +354,6 @@ body {
     font-weight: 700;
 }
 
-/**/
-
 #interactive-comments .comments-content .current-user-comment .content .text-content p {
     line-height: 1.5;
     color: var(--grayish-blue);
@@ -395,9 +393,6 @@ body {
     font-size: 16px;
     font-weight: 700;
 }
-
-
-/**/
 
 #interactive-comments .comment-add {
     display: flex;
@@ -452,4 +447,14 @@ body {
     padding: 20px;
     border: 1px solid #ccc;
     text-align: center;
+}
+
+.comment-owner {
+    background-color: var(--moderate-blue);
+    color: var(--white);
+    font-size: 12px;
+    border-radius: 4px;
+    padding: 3px 6px;
+    margin: 0;
+    width: fit-content;
 }
