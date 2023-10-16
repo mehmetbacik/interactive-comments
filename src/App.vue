@@ -11,7 +11,7 @@
           <div class="top-content">
             <div class="user-inf">
               <img :src="getUserImage(comment.user.image)" alt="User Avatar" v-if="comment.user && comment.user.image && comment.user.image.png" />
-              <p class="name">{{ comment.user.username }}</p>
+              <span class="name">{{ comment.user.username }} <p v-if="isCommentOwner(comment.user)">You</p></span>
               <p class="date">{{ comment.createdAt }}</p>
             </div>
             <div class="rp-button">
@@ -47,7 +47,7 @@
             <div class="top-content">
               <div class="user-inf">
                 <img :src="getUserImage(reply.user.image)" alt="User Avatar" v-if="reply.user && reply.user.image && reply.user.image.png" />
-                <p class="name">{{ reply.user.username }}</p>
+                <span class="name">{{ reply.user.username }} <p v-if="isCommentOwner(reply.user)">You</p></span>
                 <p class="date">{{ reply.createdAt }}</p>
               </div>
               <div class="rp-button">
@@ -180,7 +180,8 @@ export default {
     },
     addComment() {
       if (this.newComment.trim() === '') return;
-      this.comments.push({
+  
+      const newComment = {
         id: new Date().getTime(),
         content: this.newComment,
         createdAt: 'now',
@@ -190,8 +191,17 @@ export default {
         showReply: false,
         isEditing: false,
         replyText: '',
-      });
+      };
+
+      if (this.isCommentOwner(newComment.user)) {
+        newComment.user.isCurrentUser = true;
+      }
+
+      this.comments.push(newComment);
       this.newComment = '';
+    },
+    isCommentOwner(user) {
+      return user.username === this.currentUser.username;
     },
     vote(item, value) {
       if (!item.voted) {
