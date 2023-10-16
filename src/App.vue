@@ -21,9 +21,9 @@
             </div>
           </div>
           <div class="text-content">
-            <p v-if="comment.isEditing && isCurrentUserComment(comment)">
+            <p v-if="comment.isEditing && isCurrentUserComment(comment)" class="comment-content-edit">
               <textarea v-model="comment.content"></textarea>
-              <button @click="saveEdit(comment)">Save</button>
+              <button @click="saveEdit(comment)">Update</button>
             </p>
             <p v-else>
               {{ comment.content }}

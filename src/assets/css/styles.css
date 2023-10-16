@@ -354,6 +354,51 @@ body {
     font-weight: 700;
 }
 
+/**/
+
+#interactive-comments .comments-content .current-user-comment .content .text-content p {
+    line-height: 1.5;
+    color: var(--grayish-blue);
+    margin-bottom: 0;
+}
+
+#interactive-comments .comments-content .current-user-comment .content .comment-content-edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+#interactive-comments .comments-content .current-user-comment .content .comment-content-edit textarea {
+    width: -webkit-fill-available;
+    border: 2px solid var(--light-gray);
+    border-radius: 10px;
+    color: var(--dark-blue);
+    height: 60px;
+    padding: 15px 25px;
+    position: relative;
+    resize: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+#interactive-comments .comments-content .current-user-comment .content .comment-content-edit button {
+    text-transform: uppercase;
+    background-color: var(--moderate-blue);
+    color: var(--white);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+/**/
+
 #interactive-comments .comment-add {
     display: flex;
     align-items: flex-start;
