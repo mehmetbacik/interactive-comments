@@ -89,9 +89,23 @@ body {
 }
 
 #interactive-comments .comments-content .current-user-comment .content .top-content .user-inf .name {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     margin: 0;
     font-weight: 500;
     color: var(--dark-blue);
+}
+
+#interactive-comments .comments-content .current-user-comment .content .top-content .user-inf .name .comment-owner {
+    background-color: var(--moderate-blue);
+    color: var(--white);
+    font-size: 12px;
+    line-height: 1.1;
+    border-radius: 3px;
+    padding: 2px 7px;
+    margin: 0;
+    width: fit-content;
 }
 
 #interactive-comments .comments-content .current-user-comment .content .top-content .user-inf .date {
@@ -269,9 +283,23 @@ body {
 }
 
 #interactive-comments .comments-content .comment-reply .comment-reply-content .content .top-content .user-inf .name {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     margin: 0;
     font-weight: 500;
     color: var(--dark-blue);
+}
+
+#interactive-comments .comments-content .comment-reply .comment-reply-content .content .top-content .user-inf .name .comment-owner {
+    background-color: var(--moderate-blue);
+    color: var(--white);
+    font-size: 12px;
+    line-height: 1.1;
+    border-radius: 3px;
+    padding: 2px 7px;
+    margin: 0;
+    width: fit-content;
 }
 
 #interactive-comments .comments-content .comment-reply .comment-reply-content .content .top-content .user-inf .date {
@@ -449,12 +477,3 @@ body {
     text-align: center;
 }
 
-.comment-owner {
-    background-color: var(--moderate-blue);
-    color: var(--white);
-    font-size: 12px;
-    border-radius: 4px;
-    padding: 3px 6px;
-    margin: 0;
-    width: fit-content;
-}
