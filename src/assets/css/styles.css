@@ -348,6 +348,11 @@ body {
     margin-bottom: 0;
 }
 
+#interactive-comments .comments-content .comment-reply .comment-reply-content .content .text-content p .replyingTo{
+    color: var(--moderate-blue);
+    font-weight: 700;
+}
+
 #interactive-comments .comments-content .comment-reply .comment-reply-content .comment-reply-content-edit {
     display: flex;
     flex-direction: column;
