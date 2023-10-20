@@ -111,6 +111,33 @@ export default {
         }),
       };
     });
+    const storedComments = localStorage.getItem('comments');
+    const jsonComments = storedComments ? JSON.parse(storedComments) : [];
+    jsonComments.forEach(comment => {
+      const exists = this.comments.some(existingComment => existingComment.id === comment.id);
+      if (!exists) {
+        this.comments.push(comment);
+      }
+    });
+    this.comments = this.comments.map(comment => {
+      return {
+        ...comment,
+        replies: comment.replies.map(reply => {
+          return {
+            ...reply,
+            isEditing: false,
+          };
+        }),
+      };
+    });
+  },
+  watch: {
+    comments: {
+      handler(newComments) {
+        localStorage.setItem('comments', JSON.stringify(newComments));
+      },
+      deep: true,
+    },
   },
   methods: {
     toggleReply(comment) {
