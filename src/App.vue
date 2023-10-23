@@ -75,9 +75,10 @@
       <button @click="addComment">Send</button>
     </div>
     <div class="confirmation-popup" v-if="confirmDelete">
-      <p>Are you sure?</p>
-      <button @click="confirmDeleteAction">Yes</button>
-      <button @click="cancelDeleteAction">No</button>
+      <span>Delete comment</span>
+      <p>Are you sure you want to delete this comment? This will remove the comment and can't be undone.</p>
+      <button @click="confirmDeleteAction">Yes, delete</button>
+      <button @click="cancelDeleteAction">No, cancel</button>
     </div>
   </div>
 </template>
