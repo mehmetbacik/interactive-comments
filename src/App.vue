@@ -74,11 +74,15 @@
       <textarea v-model="newComment" class="comment-text" placeholder="Add a comment..." spellcheck="false"></textarea>
       <button @click="addComment">Send</button>
     </div>
-    <div class="confirmation-popup" v-if="confirmDelete">
-      <span>Delete comment</span>
-      <p>Are you sure you want to delete this comment? This will remove the comment and can't be undone.</p>
-      <button @click="confirmDeleteAction">Yes, delete</button>
-      <button @click="cancelDeleteAction">No, cancel</button>
+    <div class="confirmation-popup overlay" v-if="confirmDelete">
+      <div class="confirmation-popup-content">
+        <span>Delete comment</span>
+        <p>Are you sure you want to delete this comment? This will remove the comment and can't be undone.</p>
+        <div class="popup-button-group">
+          <button @click="confirmDeleteAction">Yes, delete</button>
+          <button @click="cancelDeleteAction">No, cancel</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
