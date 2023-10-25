@@ -56,13 +56,13 @@
               </div>
             </div>
             <div class="text-content">
-              
               <p v-if="reply.isEditing && isCurrentUserComment(reply)" class="comment-reply-content-edit">
                 <textarea v-model="reply.content"></textarea>
                 <button @click="saveReplyEdit(reply)">Update</button>
               </p>
               <p v-else>
-                <span v-if="reply.replyingTo" class="replyingTo">@{{ reply.replyingTo }}</span> {{ reply.content }}
+                <span v-if="reply.replyingTo" class="replyingTo">@{{ reply.replyingTo }}</span>
+                <span v-html="reply.content"></span>
               </p>
             </div>
           </div>
@@ -148,19 +148,18 @@ export default {
     toggleReply(comment) {
       comment.showReply = !comment.showReply;
       if (comment.showReply) {
-        comment.replyText = `@${comment.user.username} `;
-      } else {
         comment.replyText = '';
       }
     },
     submitReply(comment) {
-        comment.replies.push({
-        id: new Date().getTime(),
-        content: comment.replyText,
-        createdAt: 'now',
-        score: 0,
-        user: this.currentUser,
-        isEditing: false,
+      const replyContent = `<p>@${comment.user.username}</p> ${comment.replyText}`;
+      comment.replies.push({
+          id: new Date().getTime(),
+          content: replyContent,
+          createdAt: 'now',
+          score: 0,
+          user: this.currentUser,
+          isEditing: false,
       });
       comment.replyText = '';
       comment.showReply = false;
