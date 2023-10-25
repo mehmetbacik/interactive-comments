@@ -62,7 +62,7 @@
               </p>
               <p v-else>
                 <span v-if="reply.replyingTo" class="replyingTo">@{{ reply.replyingTo }}</span>
-                <span v-html="reply.content"></span>
+                <span v-html="reply.content" :class="{ 'r-content': !reply.replyingTo }"></span>
               </p>
             </div>
           </div>
@@ -152,7 +152,7 @@ export default {
       }
     },
     submitReply(comment) {
-      const replyContent = `<p>@${comment.user.username}</p> ${comment.replyText}`;
+      const replyContent = `<p class='rc-user'>@${comment.user.username}</p> ${comment.replyText}`;
       comment.replies.push({
           id: new Date().getTime(),
           content: replyContent,

@@ -351,6 +351,7 @@ body {
 #interactive-comments .comments-content .comment-reply .comment-reply-content .content .text-content p .replyingTo{
     color: var(--moderate-blue);
     font-weight: 700;
+    margin-right: 5px;
 }
 
 #interactive-comments .comments-content .comment-reply .comment-reply-content .comment-reply-content-edit {
@@ -542,4 +543,16 @@ body {
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
     pointer-events: auto;
+}
+
+#interactive-comments .comments-content .comment-reply .comment-reply-content .content .text-content p .r-content {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#interactive-comments .comments-content .comment-reply .comment-reply-content .content .text-content p .r-content .rc-user {
+    color: var(--moderate-blue);
+    font-weight: 700;
+    margin: 0;
 }
