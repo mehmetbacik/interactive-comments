@@ -79,8 +79,8 @@
         <span>Delete comment</span>
         <p>Are you sure you want to delete this comment? This will remove the comment and can't be undone.</p>
         <div class="popup-button-group">
-          <button @click="confirmDeleteAction">Yes, delete</button>
-          <button @click="cancelDeleteAction">No, cancel</button>
+          <button @click="cancelDeleteAction" class="cancel">No, cancel</button>
+          <button @click="confirmDeleteAction" class="confirm">Yes, delete</button>
         </div>
       </div>
     </div>
