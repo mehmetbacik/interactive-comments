@@ -354,6 +354,18 @@ body {
     margin-right: 5px;
 }
 
+#interactive-comments .comments-content .comment-reply .comment-reply-content .content .text-content p .r-content {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#interactive-comments .comments-content .comment-reply .comment-reply-content .content .text-content p .r-content .rc-user {
+    color: var(--moderate-blue);
+    font-weight: 700;
+    margin: 0;
+}
+
 #interactive-comments .comments-content .comment-reply .comment-reply-content .comment-reply-content-edit {
     display: flex;
     flex-direction: column;
@@ -472,7 +484,7 @@ body {
     font-weight: 700;
 }
 
-.confirmation-popup {
+#interactive-comments .confirmation-popup {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -483,7 +495,7 @@ body {
     text-align: center;
 }
 
-.confirmation-popup-content {
+#interactive-comments .confirmation-popup .confirmation-popup-content {
     background-color: var(--white);
     border-radius: 10px;
     width: 300px;
@@ -494,19 +506,19 @@ body {
     justify-content: center;
 }
 
-.confirmation-popup-content span {
+#interactive-comments .confirmation-popup .confirmation-popup-content span {
     font-size: 20px;
     font-weight: 500;
     color: var(--grayish-blue);
 }
 
-.confirmation-popup-content p {
+#interactive-comments .confirmation-popup .confirmation-popup-content p {
     text-align: left;
     line-height: 1.5;
     color: var(--grayish-blue);
 }
 
-.popup-button-group {
+#interactive-comments .confirmation-popup .popup-button-group {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -514,7 +526,7 @@ body {
     width: 100%;
 }
 
-.popup-button-group button {
+#interactive-comments .confirmation-popup .popup-button-group button {
     flex-basis: 50%;
     border-radius: 10px;
     border: none;
@@ -526,15 +538,15 @@ body {
     font-weight: 700;
 }
 
-.popup-button-group button.confirm {
+#interactive-comments .confirmation-popup .popup-button-group button.confirm {
     background-color: var(--soft-red);
 }
 
-.popup-button-group button.cancel {
+#interactive-comments .confirmation-popup .popup-button-group button.cancel {
     background-color: var(--grayish-blue);
 }
 
-.overlay {
+#interactive-comments .overlay {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -543,16 +555,4 @@ body {
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
     pointer-events: auto;
-}
-
-#interactive-comments .comments-content .comment-reply .comment-reply-content .content .text-content p .r-content {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-#interactive-comments .comments-content .comment-reply .comment-reply-content .content .text-content p .r-content .rc-user {
-    color: var(--moderate-blue);
-    font-weight: 700;
-    margin: 0;
 }
