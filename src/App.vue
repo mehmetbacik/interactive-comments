@@ -57,12 +57,12 @@
             </div>
             <div class="text-content">
               <p v-if="reply.isEditing && isCurrentUserComment(reply)" class="comment-reply-content-edit">
-                <textarea v-model="reply.content"></textarea>
+                <textarea v-html="getCleanContent(reply.content)"></textarea>
                 <button @click="saveReplyEdit(reply)">Update</button>
               </p>
               <p v-else>
                 <span v-if="reply.replyingTo" class="replyingTo">@{{ reply.replyingTo }}</span>
-                <span v-html="reply.content" :class="{ 'r-content': !reply.replyingTo }"></span>
+                <span v-html="getCleanContent(reply.content)" :class="{ 'r-content': !reply.replyingTo }"></span>
               </p>
             </div>
           </div>
@@ -89,6 +89,7 @@
 
 <script>
 import jsonData from './assets/data/data.json';
+import DOMPurify from 'dompurify';
 
 export default {
   data() {
@@ -258,6 +259,9 @@ export default {
         return require(`${image.png}`);
       }
     },
+    getCleanContent(content) {
+      return DOMPurify.sanitize(content);
+    }
   },
 };
 </script>
