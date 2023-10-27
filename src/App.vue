@@ -15,15 +15,15 @@
               <p class="date">{{ comment.createdAt }}</p>
             </div>
             <div class="rp-button">
-              <button @click="deleteCommentConfirmation(comment.id)" v-if="isCurrentUserComment(comment)" class="delete">Delete</button>
-              <button @click="editComment(comment)" v-if="isCurrentUserComment(comment)" class="edit">Edit</button>
-              <button @click="toggleReply(comment)" class="reply">Reply</button>
+              <button @click="deleteCommentConfirmation(comment.id)" v-if="isCurrentUserComment(comment)" class="delete">{{ buttonTexts.delete }}</button>
+              <button @click="editComment(comment)" v-if="isCurrentUserComment(comment)" class="edit">{{ buttonTexts.edit }}</button>
+              <button @click="toggleReply(comment)" class="reply">{{ buttonTexts.reply }}</button>
             </div>
           </div>
           <div class="text-content">
             <p v-if="comment.isEditing && isCurrentUserComment(comment)" class="comment-content-edit">
               <textarea v-model="comment.content"></textarea>
-              <button @click="saveEdit(comment)">Update</button>
+              <button @click="saveEdit(comment)">{{ buttonTexts.update }}</button>
             </p>
             <p v-else>
               {{ comment.content }}
@@ -34,7 +34,7 @@
       <div class="comment-reply-submit" v-if="comment.showReply">
         <img :src="getUserImage(currentUser.image)" alt="User Avatar" v-if="currentUser && currentUser.image && currentUser.image.png" />
         <textarea v-model="comment.replyText" class="comment-reply-text" placeholder="Add a reply..." spellcheck="false"></textarea>
-        <button @click="submitReply(comment)">Reply</button>
+        <button @click="submitReply(comment)">{{ buttonTexts.reply }}</button>
       </div>
       <div class="comment-reply" v-if="comment.replies.length > 0">
         <div class="comment-reply-content" v-for="reply in comment.replies" :key="reply.id">
@@ -51,14 +51,14 @@
                 <p class="date">{{ reply.createdAt }}</p>
               </div>
               <div class="rp-button">
-                <button @click="deleteReplyConfirmation(reply.id)" v-if="isCurrentUserComment(reply)" class="delete">Delete</button>
-                <button @click="editReply(reply)" v-if="isCurrentUserComment(reply)" class="edit">Edit</button>
+                <button @click="deleteReplyConfirmation(reply.id)" v-if="isCurrentUserComment(reply)" class="delete">{{ buttonTexts.delete }}</button>
+                <button @click="editReply(reply)" v-if="isCurrentUserComment(reply)" class="edit">{{ buttonTexts.edit }}</button>
               </div>
             </div>
             <div class="text-content">
               <p v-if="reply.isEditing && isCurrentUserComment(reply)" class="comment-reply-content-edit">
                 <textarea v-html="getCleanContent(reply.content)"></textarea>
-                <button @click="saveReplyEdit(reply)">Update</button>
+                <button @click="saveReplyEdit(reply)">{{ buttonTexts.update }}</button>
               </p>
               <p v-else>
                 <span v-if="reply.replyingTo" class="replyingTo">@{{ reply.replyingTo }}</span>
@@ -72,15 +72,15 @@
     <div class="comment-add">
       <img :src="getUserImage(currentUser.image)" alt="User Avatar" v-if="currentUser && currentUser.image && currentUser.image.png" />
       <textarea v-model="newComment" class="comment-text" placeholder="Add a comment..." spellcheck="false"></textarea>
-      <button @click="addComment">Send</button>
+      <button @click="addComment">{{ buttonTexts.send }}</button>
     </div>
     <div class="confirmation-popup overlay" v-if="confirmDelete">
       <div class="confirmation-popup-content">
         <span>Delete comment</span>
         <p>Are you sure you want to delete this comment? This will remove the comment and can't be undone.</p>
         <div class="popup-button-group">
-          <button @click="cancelDeleteAction" class="cancel">No, cancel</button>
-          <button @click="confirmDeleteAction" class="confirm">Yes, delete</button>
+          <button @click="cancelDeleteAction" class="cancel">{{ buttonTexts.cancel }}</button>
+          <button @click="confirmDeleteAction" class="confirm">{{ buttonTexts.confirm }}</button>
         </div>
       </div>
     </div>
@@ -100,6 +100,15 @@ export default {
       confirmDelete: false,
       commentToDelete: null,
       replyToDelete: null,
+      buttonTexts: {
+        update: 'Update',
+        delete: 'Delete',
+        edit: 'Edit',
+        reply: 'Reply',
+        send: 'Send',
+        cancel: 'No, cancel',
+        confirm: 'Yes, delete'
+      },
     };
   },
   mounted() {
