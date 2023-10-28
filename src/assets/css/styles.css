@@ -326,6 +326,14 @@ body {
     gap: 10px;
 }
 
+#interactive-comments .comments-content .comment-reply .comment-reply-content .content .top-content .rp-button .reply {
+    color: var(--moderate-blue);
+}
+
+#interactive-comments .comments-content .comment-reply .comment-reply-content .content .top-content .rp-button .reply:before {
+    content: url(/src/assets/images/icon-reply.svg);
+}
+
 #interactive-comments .comments-content .comment-reply .comment-reply-content .content .top-content .rp-button .delete {
     color: var(--soft-red);
 }
