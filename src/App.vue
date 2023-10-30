@@ -53,7 +53,7 @@
               <div class="rp-button">
                 <button @click="deleteReplyConfirmation(reply.id)" v-if="isCurrentUserComment(reply)" class="delete">{{ buttonTexts.delete }}</button>
                 <button @click="editReply(reply)" v-if="isCurrentUserComment(reply)" class="edit">{{ buttonTexts.edit }}</button>
-                <button @click="toggleReply(comment)" class="reply">{{ buttonTexts.reply }}</button>
+                <button @click="toggleReply(comment)" v-if="!isCurrentUserComment(reply)" class="reply">{{ buttonTexts.reply }}</button>
               </div>
             </div>
             <div class="text-content">

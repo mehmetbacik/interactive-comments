@@ -564,3 +564,25 @@ body {
     z-index: 999;
     pointer-events: auto;
 }
+
+@media screen and (min-width: 1201px) and (max-width:1650px) {
+
+}
+
+@media screen and (min-width: 993px) and (max-width:1200px) { 
+    #interactive-comments {
+        width: calc(55% - 60px);
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width:992px) {
+
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 375px) { 
+
+}
