@@ -452,6 +452,10 @@ body {
     font-weight: 700;
 }
 
+#interactive-comments .comments-content .comment-reply-submit .mobile-design {
+    display: none;
+}
+
 #interactive-comments .comment-add {
     display: flex;
     align-items: flex-start;
@@ -461,6 +465,10 @@ body {
     border-radius: 10px;
     padding: 25px;
     margin-top: 20px;
+}
+
+#interactive-comments .comment-add .mobile-design {
+    display: none;
 }
 
 #interactive-comments .comment-add img {
@@ -772,6 +780,127 @@ body {
 
     #interactive-comments .comments-content .comment-reply .comment-reply-content .content {
         width: 100%;
+    }
+}
+
+@media (max-width: 425px) { 
+    body {
+        font-size: 14px;
+    }
+
+    #interactive-comments .comments-content .current-user-comment .content .top-content .user-inf {
+        gap: 10px;
+    }
+
+    #interactive-comments .comments-content .current-user-comment .mobile-design .rp-button button {
+        font-size: 14px;
+    }
+
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .mobile-design .rp-button button {
+        font-size: 14px;
+    }
+
+    #interactive-comments .comments-content .current-user-comment .mobile-design .rp-button {
+        gap: 2px;
+    }
+
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .mobile-design .rp-button {
+        gap: 2px;
+    }
+
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .mobile-design .rp-button button {
+        gap: 5px;
+    }
+
+    #interactive-comments .comments-content .current-user-comment .mobile-design .rp-button button {
+        gap: 5px;
+    }
+
+    #interactive-comments .comment-add img {
+        display: none;
+    }
+
+    #interactive-comments .comment-add .mobile-design img {
+        display: block;
+    }
+
+    #interactive-comments .comment-add button {
+        display: none;
+    }
+
+    #interactive-comments .comment-add .mobile-design button {
+        display: block;
+    }
+
+    #interactive-comments .comment-add .mobile-design {
+        display: flex;
+    }
+
+    #interactive-comments .comment-add {
+        flex-direction: column;
+    }
+
+    #interactive-comments .comment-add .comment-text {
+        width: -webkit-fill-available;
+    }
+
+    #interactive-comments .comments-content .current-user-comment .score {
+        padding: 8px;
+    }
+
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .score {
+        padding: 8px;
+    }
+
+    #interactive-comments .comments-content .current-user-comment .score p {
+        margin: 3px 7px;
+    }
+
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .score p {
+        margin: 3px 7px;
+    }
+
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .comment-reply-content-edit button {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+
+    #interactive-comments .comments-content .comment-reply-submit button {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+
+    #interactive-comments .comment-add .mobile-design button {
+        padding: 12px 25px;
+        font-size: 14px;
+    }
+
+    #interactive-comments .comments-content .comment-reply-submit .mobile-design {
+        display: flex;
+    }
+
+    #interactive-comments .comments-content .comment-reply-submit img {
+        display: none;
+    }
+
+    #interactive-comments .comments-content .comment-reply-submit .mobile-design img {
+        display: block;
+    }
+
+    #interactive-comments .comments-content .comment-reply-submit button {
+        display: none;
+    }
+
+    #interactive-comments .comments-content .comment-reply-submit .mobile-design button {
+        display: block;
+    }
+
+    #interactive-comments .comments-content .comment-reply-submit {
+        flex-direction: column;
+    }
+
+    #interactive-comments .comments-content .comment-reply-submit .comment-reply-text {
+        width: -webkit-fill-available;
     }
 }
 

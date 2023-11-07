@@ -47,6 +47,10 @@
         <img :src="getUserImage(currentUser.image)" alt="User Avatar" v-if="currentUser && currentUser.image && currentUser.image.png" />
         <textarea v-model="comment.replyText" class="comment-reply-text" placeholder="Add a reply..." spellcheck="false"></textarea>
         <button @click="submitReply(comment)">{{ buttonTexts.reply }}</button>
+        <div class="mobile-design">
+          <img :src="getUserImage(currentUser.image)" alt="User Avatar" v-if="currentUser && currentUser.image && currentUser.image.png" />
+          <button @click="submitReply(comment)">{{ buttonTexts.reply }}</button>
+        </div>
       </div>
       <div class="comment-reply" v-if="comment.replies.length > 0">
         <div class="comment-reply-content" v-for="reply in comment.replies" :key="reply.id">
@@ -98,6 +102,10 @@
       <img :src="getUserImage(currentUser.image)" alt="User Avatar" v-if="currentUser && currentUser.image && currentUser.image.png" />
       <textarea v-model="newComment" class="comment-text" placeholder="Add a comment..." spellcheck="false"></textarea>
       <button @click="addComment">{{ buttonTexts.send }}</button>
+      <div class="mobile-design">
+        <img :src="getUserImage(currentUser.image)" alt="User Avatar" v-if="currentUser && currentUser.image && currentUser.image.png" />
+        <button @click="addComment">{{ buttonTexts.send }}</button>
+      </div>
     </div>
     <ConfirmationPopup :confirmDelete="confirmDelete" :buttonTexts="buttonTexts" @cancel="cancelDeleteAction" @confirm="confirmDeleteAction" />
   </div>
