@@ -2,6 +2,18 @@
   <div id="interactive-comments">
     <div class="comments-content" v-for="comment in comments" :key="comment.id">
       <div class="current-user-comment">
+        <div class="mobile-design">
+          <div class="score">
+            <button @click="vote(comment, 1)"><i class="plus"></i></button>
+            <p>{{ comment.score }}</p>
+            <button @click="vote(comment, -1)"><i class="minus"></i></button>
+          </div>
+          <div class="rp-button">
+            <button @click="deleteCommentConfirmation(comment.id)" v-if="isCurrentUserComment(comment)" class="delete">{{ buttonTexts.delete }}</button>
+            <button @click="editComment(comment)" v-if="isCurrentUserComment(comment)" class="edit">{{ buttonTexts.edit }}</button>
+            <button @click="toggleReply(comment)" class="reply">{{ buttonTexts.reply }}</button>
+          </div>
+        </div>
         <div class="score">
           <button @click="vote(comment, 1)"><i class="plus"></i></button>
           <p>{{ comment.score }}</p>
@@ -38,6 +50,18 @@
       </div>
       <div class="comment-reply" v-if="comment.replies.length > 0">
         <div class="comment-reply-content" v-for="reply in comment.replies" :key="reply.id">
+          <div class="mobile-design">
+            <div class="score">
+              <button @click="vote(reply, 1)"><i class="plus"></i></button>
+              <p>{{ reply.score }}</p>
+              <button @click="vote(reply, -1)"><i class="minus"></i></button>
+            </div>
+            <div class="rp-button">
+              <button @click="deleteReplyConfirmation(reply.id)" v-if="isCurrentUserComment(reply)" class="delete">{{ buttonTexts.delete }}</button>
+              <button @click="editReply(reply)" v-if="isCurrentUserComment(reply)" class="edit">{{ buttonTexts.edit }}</button>
+              <button @click="toggleReply(comment)" v-if="!isCurrentUserComment(reply)" class="reply">{{ buttonTexts.reply }}</button>
+            </div>
+          </div>
           <div class="score">
             <button @click="vote(reply, 1)"><i class="plus"></i></button>
             <p>{{ reply.score }}</p>
