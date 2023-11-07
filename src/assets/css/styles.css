@@ -633,6 +633,89 @@ body {
         display: flex;
     }
 
+    #interactive-comments .comments-content .current-user-comment .mobile-design .rp-button button {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    #interactive-comments .comments-content .current-user-comment .mobile-design .rp-button {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    #interactive-comments .comments-content .current-user-comment .mobile-design .rp-button .reply {
+        color: var(--moderate-blue);
+    }
+    
+    #interactive-comments .comments-content .current-user-comment .mobile-design .rp-button .reply:before {
+        content: url(/src/assets/images/icon-reply.svg);
+    }
+    
+    #interactive-comments .comments-content .current-user-comment .mobile-design .rp-button .delete {
+        color: var(--soft-red);
+    }
+    
+    #interactive-comments .comments-content .current-user-comment .mobile-design .rp-button .delete:before {
+        content: url(/src/assets/images/icon-delete.svg);
+    }
+    
+    #interactive-comments .comments-content .current-user-comment .mobile-design .rp-button .edit {
+        color: var(--moderate-blue);
+    }
+    
+    #interactive-comments .comments-content .current-user-comment .mobile-design .rp-button .edit:before {
+        content: url(/src/assets/images/icon-edit.svg);
+    }
+
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .mobile-design .rp-button button {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        color: var(--moderate-blue);
+        font-size: 16px;
+        font-weight: 700;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+    
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .mobile-design .rp-button {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .mobile-design .rp-button .reply {
+        color: var(--moderate-blue);
+    }
+    
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .mobile-design .rp-button .reply:before {
+        content: url(/src/assets/images/icon-reply.svg);
+    }
+    
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .mobile-design .rp-button .delete {
+        color: var(--soft-red);
+    }
+    
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .mobile-design .rp-button .delete:before {
+        content: url(/src/assets/images/icon-delete.svg);
+    }
+    
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .mobile-design .rp-button .edit {
+        color: var(--moderate-blue);
+    }
+    
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .mobile-design .rp-button .edit:before {
+        content: url(/src/assets/images/icon-edit.svg);
+    }
+
     #interactive-comments .comments-content .current-user-comment {
         flex-direction: column-reverse;
     }
