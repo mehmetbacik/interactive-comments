@@ -905,5 +905,31 @@ body {
 }
 
 @media (max-width: 375px) { 
+    body {
+        font-size: 12px;
+    }
 
+    #interactive-comments .comments-content .current-user-comment .mobile-design {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .mobile-design {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .content .top-content .user-inf {
+        gap: 10px;
+    }
+
+    #interactive-comments .comments-content .current-user-comment .mobile-design .rp-button button {
+        font-size: 12px;
+    }
+
+    #interactive-comments .comments-content .comment-reply .comment-reply-content .mobile-design .rp-button button {
+        font-size: 12px;
+    }
 }
