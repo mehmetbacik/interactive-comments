@@ -58,3 +58,24 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Clone the Repository
+
+To clone the project, run the following commands:
+
+```
+git clone https://github.com/mehmetbacik/interactive-comments.git
+```
+```
+cd interactive-comments
+```
+
+## Deploy
+
+For a detailed exploration of the project, you can visit the [deployed site here](#).
+
+## GitHub Page
+
+GitHub Repository: [https://github.com/mehmetbacik/interactive-comments.git](https://github.com/mehmetbacik/interactive-comments.git)
+
+---
