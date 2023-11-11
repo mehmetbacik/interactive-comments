@@ -35,6 +35,16 @@ Interactive Comments provides users with an interactive platform to post comment
 
 - **Webpack:** A modular and performance-focused JavaScript compiler and bundler used in the compilation and configuration processes of the project.
 
+## Clone the Repository
+
+To clone the project, run the following commands:
+
+```
+git clone https://github.com/mehmetbacik/interactive-comments.git
+```
+```
+cd interactive-comments
+```
 
 ## Project setup
 ```
@@ -58,17 +68,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-
-## Clone the Repository
-
-To clone the project, run the following commands:
-
-```
-git clone https://github.com/mehmetbacik/interactive-comments.git
-```
-```
-cd interactive-comments
-```
 
 ## Deploy
 
