@@ -71,7 +71,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Deploy
 
-For a detailed exploration of the project, you can visit the [deployed site here](#).
+For a detailed exploration of the project, you can visit the [deployed site here](https://interactive-comments-blue.vercel.app/).
 
 ## GitHub Page
 
